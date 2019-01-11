@@ -13,10 +13,10 @@ After running the runner class (Runner), follow the instructions provided by the
 
 Special Cases:
 For anything Trig based, typing a: 
-S represents Sin[
-C represents Cos[
-T represents Tan[
-A represents Sec[
-B represents Cot[
-D represents Csc[
+S represents Sin[ 
+C represents Cos[ 
+T represents Tan[ 
+A represents Sec[ 
+B represents Cot[ 
+D represents Csc[ 
 Additionally, for any use of pi, type Pi
