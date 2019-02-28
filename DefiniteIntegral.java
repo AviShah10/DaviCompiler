@@ -25,7 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 
-public class Line extends JFrame {
+public class DefiniteIntegral extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField x1;
@@ -34,11 +34,8 @@ public class Line extends JFrame {
 	private JTextField y2;
 	private JButton copy;
 	private String code;
-	private JTextField xrange;
-	private JTextField yrange;
-	private JSeparator separator;
-	private JSeparator separator_1;
 	private JButton btnGoBack;
+	private JSeparator separator;
 
 	/**
 	 * Launch the application.
@@ -47,7 +44,7 @@ public class Line extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Line frame = new Line();
+					DefiniteIntegral frame = new DefiniteIntegral();
 					frame.setSize(new Dimension(500,400));
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -60,22 +57,22 @@ public class Line extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Line() {
+	public DefiniteIntegral() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 400);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lblMakeALine = new JLabel("Make a Line in Mathematica");
-		lblMakeALine.setForeground(new Color(0, 0, 128));
-		lblMakeALine.setFont(new Font("Yu Gothic Medium", Font.BOLD, 26));
+		JLabel lblMakeALine = new JLabel("Definite Integral");
+		lblMakeALine.setForeground(Color.BLACK);
+		lblMakeALine.setFont(new Font("Cambria", Font.BOLD, 20));
 		GridBagConstraints gbc_lblMakeALine = new GridBagConstraints();
 		gbc_lblMakeALine.insets = new Insets(0, 0, 5, 0);
 		gbc_lblMakeALine.gridx = 0;
@@ -88,7 +85,7 @@ public class Line extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				setVisible(false);
 				dispose();
-				LineSelection line = new LineSelection();
+				CalculusSelection line = new CalculusSelection();
 				line.setSize(new Dimension(500,400));
 				line.setVisible(true);
 			}
@@ -100,7 +97,7 @@ public class Line extends JFrame {
 		contentPane.add(btnGoBack, gbc_btnGoBack);
 		
 		x1 = new JTextField();
-		x1.setText("x1");
+		x1.setText("expression");
 		GridBagConstraints gbc_x1 = new GridBagConstraints();
 		gbc_x1.insets = new Insets(0, 0, 5, 0);
 		gbc_x1.fill = GridBagConstraints.HORIZONTAL;
@@ -110,7 +107,7 @@ public class Line extends JFrame {
 		x1.setColumns(10);
 		
 		y1 = new JTextField();
-		y1.setText("y1");
+		y1.setText("variable");
 		GridBagConstraints gbc_y1 = new GridBagConstraints();
 		gbc_y1.insets = new Insets(0, 0, 5, 0);
 		gbc_y1.fill = GridBagConstraints.HORIZONTAL;
@@ -120,7 +117,7 @@ public class Line extends JFrame {
 		y1.setColumns(10);
 		
 		x2 = new JTextField();
-		x2.setText("x2");
+		x2.setText("lower bound");
 		GridBagConstraints gbc_x2 = new GridBagConstraints();
 		gbc_x2.insets = new Insets(0, 0, 5, 0);
 		gbc_x2.fill = GridBagConstraints.HORIZONTAL;
@@ -130,7 +127,7 @@ public class Line extends JFrame {
 		x2.setColumns(10);
 		
 		y2 = new JTextField();
-		y2.setText("y2");
+		y2.setText("upper bound");
 		GridBagConstraints gbc_y2 = new GridBagConstraints();
 		gbc_y2.insets = new Insets(0, 0, 5, 0);
 		gbc_y2.fill = GridBagConstraints.HORIZONTAL;
@@ -139,38 +136,11 @@ public class Line extends JFrame {
 		contentPane.add(y2, gbc_y2);
 		y2.setColumns(10);
 		
-		separator_1 = new JSeparator();
-		GridBagConstraints gbc_separator_1 = new GridBagConstraints();
-		gbc_separator_1.insets = new Insets(0, 0, 5, 0);
-		gbc_separator_1.gridx = 0;
-		gbc_separator_1.gridy = 6;
-		contentPane.add(separator_1, gbc_separator_1);
-		
-		xrange = new JTextField();
-		xrange.setText("x-minimum (if you are using defaults, leave this as is)");
-		GridBagConstraints gbc_xrange = new GridBagConstraints();
-		gbc_xrange.insets = new Insets(0, 0, 5, 0);
-		gbc_xrange.fill = GridBagConstraints.HORIZONTAL;
-		gbc_xrange.gridx = 0;
-		gbc_xrange.gridy = 7;
-		contentPane.add(xrange, gbc_xrange);
-		xrange.setColumns(10);
-		
-		yrange = new JTextField();
-		yrange.setText("x-maximum (if you are using defaults, leave this as is)");
-		GridBagConstraints gbc_yrange = new GridBagConstraints();
-		gbc_yrange.insets = new Insets(0, 0, 5, 0);
-		gbc_yrange.fill = GridBagConstraints.HORIZONTAL;
-		gbc_yrange.gridx = 0;
-		gbc_yrange.gridy = 8;
-		contentPane.add(yrange, gbc_yrange);
-		yrange.setColumns(10);
-		
 		separator = new JSeparator();
 		GridBagConstraints gbc_separator = new GridBagConstraints();
 		gbc_separator.insets = new Insets(0, 0, 5, 0);
 		gbc_separator.gridx = 0;
-		gbc_separator.gridy = 9;
+		gbc_separator.gridy = 6;
 		contentPane.add(separator, gbc_separator);
 		
 		JLabel lblOutput = new JLabel("Output");
@@ -178,7 +148,7 @@ public class Line extends JFrame {
 		gbc_lblOutput.ipadx = 1;
 		gbc_lblOutput.insets = new Insets(0, 0, 5, 0);
 		gbc_lblOutput.gridx = 0;
-		gbc_lblOutput.gridy = 11;
+		gbc_lblOutput.gridy = 8;
 		contentPane.add(lblOutput, gbc_lblOutput);
 		
 		copy = new JButton("Copy");
@@ -193,34 +163,18 @@ public class Line extends JFrame {
 			}
 		});
 		GridBagConstraints gbc_copy = new GridBagConstraints();
+		gbc_copy.insets = new Insets(0, 0, 5, 0);
 		gbc_copy.gridx = 0;
-		gbc_copy.gridy = 12;
+		gbc_copy.gridy = 9;
 		contentPane.add(copy, gbc_copy);
 		
 		JButton btnCompile = new JButton("Compile");
 		btnCompile.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				int y22 = Integer.parseInt(y2.getText());
-				int y11 = Integer.parseInt(y1.getText());
-				int x22 = Integer.parseInt(x2.getText());
-				int x11 = Integer.parseInt(x1.getText());
+								
 				
-				double slope = ((double)y22-y11)/(x22-x11);
-				double yInt = (slope*x11*-1)+y11;
-				
-				double xRange=-10;
-				double yRange=10;
-				
-				if(!xrange.getText().equals("x-minimum (if you are using defaults, leave this as is)")) {
-					xRange=Double.parseDouble(xrange.getText());
-				}
-				if(!yrange.getText().equals("x-maximum (if you are using defaults, leave this as is)")) {
-					yRange=Double.parseDouble(yrange.getText());
-				}
-				
-				code= "Plot[y="+(y22-y11)+"/"+(x22-x11)+"x + "+ yInt+", {x, " + xRange + ", " + yRange + "}]";
-				
+				code="Integrate["+x1.getText()+", {"+y1.getText()+", "+x2.getText()+", "+y2.getText()+"}]";
 				lblOutput.setText(code);
 				
 				StringSelection stringSelection = new StringSelection(code);
@@ -233,7 +187,7 @@ public class Line extends JFrame {
 		GridBagConstraints gbc_btnCompile = new GridBagConstraints();
 		gbc_btnCompile.insets = new Insets(0, 0, 5, 0);
 		gbc_btnCompile.gridx = 0;
-		gbc_btnCompile.gridy = 10;
+		gbc_btnCompile.gridy = 7;
 		contentPane.add(btnCompile, gbc_btnCompile);
 		
 	}
